@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Policy Explainer
 
-## Getting Started
+A lean hackathon MVP that turns a hosted bill into a plain-language digest: what changes, who it affects, and what to watch next.
 
-First, run the development server:
+## What this MVP does
+
+- Serves one sample bill from `public/bills/`
+- Shows a public home page and a breakdown page
+- Summarizes with Gemini 2.5 Flash when no cached digest exists
+- Falls back to `data/summaries/` so the exhibit still works without an API key
+
+## Run it
 
 ```bash
+npm install
+cp .env.example .env.local
+# Optional: paste a Gemini API key from https://aistudio.google.com/apikey
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000). Click the bill card to see the digest. “Read the original document” opens the markdown file in `public/`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The committed file `data/summaries/youth-employment-bill.json` is used first. Delete that file and set `GEMINI_API_KEY` to generate a live digest; the result is written back so the next load is instant.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Swap the bill
 
-## Learn More
+1. Replace `public/bills/youth-employment-bill.md` (or add another `.md` file).
+2. Update the entry in `data/bills.ts` (title, date, teaser, slug, file path).
+3. Delete the matching JSON in `data/summaries/` if you want a fresh LLM pass.
 
-To learn more about Next.js, take a look at the following resources:
+## Out of scope for this lean MVP
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Auth, admin uploads, user-uploaded bills, African language support, email subscriptions, and a database. Those belong in a later full MVP.
