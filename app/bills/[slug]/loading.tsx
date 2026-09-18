@@ -7,18 +7,9 @@ export default function Loading() {
           <div className="h-10 w-full max-w-3xl rounded bg-(--rule)" />
           <div className="h-4 w-48 rounded bg-(--rule)" />
         </div>
-        <div className="h-36 rounded-2xl bg-(--rule)" />
-        <div className="flex flex-col gap-3">
-          <div className="h-6 w-48 rounded bg-(--rule)" />
-          <div className="h-16 rounded bg-(--rule)" />
-          <div className="h-16 rounded bg-(--rule)" />
-        </div>
-        <div className="grid gap-4 sm:grid-cols-2">
-          <div className="h-36 rounded-2xl bg-(--rule)" />
-          <div className="h-36 rounded-2xl bg-(--rule)" />
-          <div className="h-36 rounded-2xl bg-(--rule)" />
-          <div className="h-36 rounded-2xl bg-(--rule)" />
-        </div>
+        <div className="h-28 rounded-2xl bg-(--rule)" />
+        <div className="h-40 rounded-2xl bg-(--rule)" />
+        <div className="h-40 rounded-2xl bg-(--rule)" />
       </div>
     </main>
   );

@@ -39,12 +39,20 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             <Link href="/" className="font-serif text-lg text-(--ink)">
               Policy Explainer
             </Link>
-            <Link
-              href="/"
-              className="text-sm text-(--muted) hover:text-(--ink)"
-            >
-              Home
-            </Link>
+            <nav className="flex items-center gap-4 text-sm">
+              <Link
+                href="/"
+                className="text-(--muted) hover:text-(--ink)"
+              >
+                Home
+              </Link>
+              <Link
+                href="/process"
+                className="text-(--muted) hover:text-(--ink)"
+              >
+                Process
+              </Link>
+            </nav>
           </div>
         </header>
         <div className="flex flex-1 flex-col">{children}</div>
