@@ -1,0 +1,30 @@
+{
+  "document": {
+    "slug": "2026-Budget-Statement-and-Economic-Policy",
+    "title": "The Budget Statement and Economic Policy of the Government of Ghana for the 2026 Financial Year",
+    "source_file": "/bills/2026-Budget-Statement-and-Economic-Policy.pdf",
+    "processed_at": "2026-09-18T17:43:51.534Z",
+    "model": "gemini-3.8-flash"
+  },
+  "sections": [
+    {
+      "title": "Front matter",
+      "heading": "Front matter",
+      "pages": "2-16",
+      "startPage": 2,
+      "endPage": 16,
+      "topics": [
+        {
+          "title": "Front matter",
+          "plain_summary": "This part of the document is front matter (cover, contents, or lists) rather than policy itself.",
+          "source_references": [
+            {
+              "pages": "2-16",
+              "section": "Front matter"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

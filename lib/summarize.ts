@@ -3,13 +3,21 @@ import { z } from "zod";
 import {
   absoluteBillPath,
   getDocument,
+  readDigest,
   writeDigest,
 } from "@/lib/documents";
 import { extractDocumentPages } from "@/lib/extract";
 import { detectSections, type DetectedSection } from "@/lib/sections";
-import type { DocumentDigest, Topic } from "@/lib/types";
+import type { DigestSection, DocumentDigest, Topic } from "@/lib/types";
 
 const MODEL = "gemini-3.8-flash";
+const RETRY_DELAYS_MS = [5_000, 15_000, 45_000];
+
+export type ProcessLogEvent = {
+  type: "info" | "retry" | "error" | "complete";
+  message: string;
+  ts: string;
+};
 
 export class MissingApiKeyError extends Error {
   constructor() {
@@ -47,6 +55,8 @@ const sectionTopicsSchema = z.object({
   topics: z.array(topicSchema),
 });
 
+type LogFn = (event: Omit<ProcessLogEvent, "ts">) => void;
+
 function apiKey() {
   return process.env.GEMINI_API_KEY;
 }
@@ -55,6 +65,87 @@ function jsonSchema() {
   const schema = z.toJSONSchema(sectionTopicsSchema) as Record<string, unknown>;
   delete schema.$schema;
   return schema;
+}
+
+function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function errorStatus(error: unknown): number | undefined {
+  if (!error || typeof error !== "object") {
+    return undefined;
+  }
+
+  const record = error as {
+    status?: unknown;
+    statusCode?: unknown;
+    code?: unknown;
+    error?: { code?: unknown; status?: unknown };
+  };
+
+  for (const value of [
+    record.status,
+    record.statusCode,
+    record.code,
+    record.error?.code,
+    record.error?.status,
+  ]) {
+    if (typeof value === "number") {
+      return value;
+    }
+  }
+
+  return undefined;
+}
+
+function errorMessage(error: unknown) {
+  return error instanceof Error ? error.message : String(error);
+}
+
+function isRetryable(error: unknown) {
+  if (error instanceof z.ZodError || error instanceof SyntaxError) {
+    return true;
+  }
+
+  const status = errorStatus(error);
+  if (status === 429 || status === 500 || status === 503) {
+    return true;
+  }
+
+  return /503|429|UNAVAILABLE|high demand|resource exhausted|try again later|overloaded|returned no text/i.test(
+    errorMessage(error),
+  );
+}
+
+async function withRetry<T>(
+  label: string,
+  log: LogFn,
+  run: () => Promise<T>,
+): Promise<T> {
+  let lastError: unknown;
+
+  for (let attempt = 0; attempt <= RETRY_DELAYS_MS.length; attempt += 1) {
+    try {
+      return await run();
+    } catch (error) {
+      lastError = error;
+      const canRetry =
+        isRetryable(error) && attempt < RETRY_DELAYS_MS.length;
+
+      if (!canRetry) {
+        throw error;
+      }
+
+      const waitMs = RETRY_DELAYS_MS[attempt];
+      log({
+        type: "retry",
+        message: `${label} · ${errorMessage(error)} · retry ${attempt + 1}/${RETRY_DELAYS_MS.length} in ${waitMs / 1000}s`,
+      });
+      await sleep(waitMs);
+    }
+  }
+
+  throw lastError;
 }
 
 function fallbackTopic(section: DetectedSection): Topic {
@@ -87,6 +178,26 @@ function fallbackTopic(section: DetectedSection): Topic {
   };
 }
 
+function ensureTopics(section: DetectedSection, topics: Topic[]): Topic[] {
+  if (topics.length > 0) {
+    return topics;
+  }
+
+  return [
+    {
+      title: section.title,
+      plain_summary:
+        "This chapter did not contain a distinct public-facing policy change.",
+      source_references: [
+        {
+          pages: `${section.startPage}-${section.endPage}`,
+          section: section.heading,
+        },
+      ],
+    },
+  ];
+}
+
 async function summarizeSection(
   section: DetectedSection,
   documentTitle: string,
@@ -99,6 +210,7 @@ async function summarizeSection(
   const interaction = await client.interactions.create({
     model: MODEL,
     store: false,
+    service_tier: "flex",
     system_instruction: `You explain policy documents to the public.
 
 Rules:
@@ -147,7 +259,19 @@ ${section.text}`,
   }));
 }
 
-export async function processDocument(slug: string): Promise<DocumentDigest> {
+export async function processDocument({
+  slug,
+  fresh = false,
+  onLog,
+}: {
+  slug: string;
+  fresh?: boolean;
+  onLog?: (event: ProcessLogEvent) => void;
+}): Promise<DocumentDigest> {
+  const log: LogFn = (event) => {
+    onLog?.({ ...event, ts: new Date().toISOString() });
+  };
+
   const bill = await getDocument(slug);
   if (!bill) {
     throw new DocumentNotFoundError(slug);
@@ -158,42 +282,39 @@ export async function processDocument(slug: string): Promise<DocumentDigest> {
     throw new MissingApiKeyError();
   }
 
+  log({ type: "info", message: `Extracting ${bill.filename}…` });
   const pages = await extractDocumentPages(absoluteBillPath(bill.filename));
-  const sections = detectSections(pages);
+  log({
+    type: "info",
+    message: `Extracted ${pages.length} pages.`,
+  });
 
+  const sections = detectSections(pages);
   if (sections.length === 0) {
     throw new Error("Could not extract any text from this document.");
   }
 
-  const client = new GoogleGenAI({ apiKey: key });
-  const digestSections: DocumentDigest["sections"] = [];
+  const llmCount = sections.filter((section) => !section.skipLlm).length;
+  const skippedCount = sections.length - llmCount;
+  log({
+    type: "info",
+    message: `Found ${sections.length} chapters (${llmCount} to send to Gemini, ${skippedCount} skipped).`,
+  });
 
-  for (const section of sections) {
-    const topics = await summarizeSection(section, bill.title, client);
-    digestSections.push({
-      title: section.title,
-      heading: section.heading,
-      pages: `${section.startPage}-${section.endPage}`,
-      startPage: section.startPage,
-      endPage: section.endPage,
-      topics:
-        topics.length > 0
-          ? topics
-          : [
-              {
-                title: section.title,
-                plain_summary:
-                  "This chapter did not contain a distinct public-facing policy change.",
-                source_references: [
-                  {
-                    pages: `${section.startPage}-${section.endPage}`,
-                    section: section.heading,
-                  },
-                ],
-              },
-            ],
+  const existing = fresh ? null : await readDigest(slug);
+  const doneByHeading = new Map(
+    existing?.sections.map((section) => [section.heading, section]) ?? [],
+  );
+
+  if (existing && doneByHeading.size > 0) {
+    log({
+      type: "info",
+      message: `Resuming from saved digest (${doneByHeading.size} chapter(s) already stored).`,
     });
   }
+
+  const client = new GoogleGenAI({ apiKey: key });
+  const digestSections: DigestSection[] = [];
 
   const digest: DocumentDigest = {
     document: {
@@ -206,6 +327,55 @@ export async function processDocument(slug: string): Promise<DocumentDigest> {
     sections: digestSections,
   };
 
+  for (const [index, section] of sections.entries()) {
+    const label = `${index + 1}/${sections.length} ${section.heading} · pp. ${section.startPage}–${section.endPage}`;
+    const saved = doneByHeading.get(section.heading);
+
+    if (saved && saved.topics.length > 0) {
+      digestSections.push(saved);
+      log({ type: "info", message: `${label} · already saved, skipping.` });
+      continue;
+    }
+
+    if (section.skipLlm || !section.text.trim()) {
+      log({ type: "info", message: `${label} · skipped (no Gemini call).` });
+    } else {
+      log({ type: "info", message: `${label} · calling Gemini…` });
+    }
+
+    const started = Date.now();
+    const topics = ensureTopics(
+      section,
+      await withRetry(label, log, () =>
+        summarizeSection(section, bill.title, client),
+      ),
+    );
+    const elapsedSec = Math.max(1, Math.round((Date.now() - started) / 1000));
+
+    digestSections.push({
+      title: section.title,
+      heading: section.heading,
+      pages: `${section.startPage}-${section.endPage}`,
+      startPage: section.startPage,
+      endPage: section.endPage,
+      topics,
+    });
+
+    digest.document.processed_at = new Date().toISOString();
+    await writeDigest(slug, digest);
+
+    if (!section.skipLlm && section.text.trim()) {
+      log({
+        type: "info",
+        message: `${label} · ${topics.length} topic(s) in ${elapsedSec}s. Saved.`,
+      });
+    }
+  }
+
   await writeDigest(slug, digest);
+  log({
+    type: "complete",
+    message: `Digest saved with ${digestSections.reduce((count, section) => count + section.topics.length, 0)} topics.`,
+  });
   return digest;
 }

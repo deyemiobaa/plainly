@@ -19,7 +19,7 @@ npm run dev
 ```
 
 1. Open [http://localhost:3000/process](http://localhost:3000/process)
-2. Click **Summarize** next to a document (a 300-page budget can take a few minutes)
+2. Click **Summarize** and watch the log under the card (a 300-page budget can take several minutes). **Continue** resumes saved chapters; **Start over** re-runs from scratch.
 3. Open [http://localhost:3000](http://localhost:3000) and read the breakdown
 
 ## Swap or add a document

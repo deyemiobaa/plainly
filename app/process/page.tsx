@@ -17,8 +17,9 @@ export default async function ProcessPage() {
           only ever read the saved JSON.
         </p>
         <p className="mt-3 text-sm leading-6 text-(--muted)">
-          A 300-page budget can take a few minutes. Keep this tab open until
-          it finishes.
+          A 300-page budget can take several minutes. Watch the log under the
+          card. If Gemini is busy, the job retries automatically and Continue
+          picks up saved chapters.
         </p>
       </section>
 
