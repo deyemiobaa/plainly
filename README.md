@@ -6,7 +6,7 @@ A lean hackathon MVP that turns hosted policy PDFs into a chapter-by-chapter pub
 
 - Serves real documents from `public/bills/`
 - Lists those files on `/process` and summarizes on demand
-- Splits a PDF into chapters, asks Gemini 2.5 Flash per chapter, and stores JSON
+- Splits a PDF into chapters, asks Gemini 3.8 Flash per chapter, and stores JSON
 - Lets anyone open `/` and the bill page to read the saved digest (no live LLM on visit)
 
 ## Run it

@@ -1,5 +1,4 @@
-import { createGoogle } from "@ai-sdk/google";
-import { generateText, Output } from "ai";
+import { GoogleGenAI } from "@google/genai";
 import { z } from "zod";
 import {
   absoluteBillPath,
@@ -9,6 +8,8 @@ import {
 import { extractDocumentPages } from "@/lib/extract";
 import { detectSections, type DetectedSection } from "@/lib/sections";
 import type { DocumentDigest, Topic } from "@/lib/types";
+
+const MODEL = "gemini-3.8-flash";
 
 export class MissingApiKeyError extends Error {
   constructor() {
@@ -50,6 +51,12 @@ function apiKey() {
   return process.env.GEMINI_API_KEY;
 }
 
+function jsonSchema() {
+  const schema = z.toJSONSchema(sectionTopicsSchema) as Record<string, unknown>;
+  delete schema.$schema;
+  return schema;
+}
+
 function fallbackTopic(section: DetectedSection): Topic {
   if (section.id === "appendices") {
     return {
@@ -83,21 +90,16 @@ function fallbackTopic(section: DetectedSection): Topic {
 async function summarizeSection(
   section: DetectedSection,
   documentTitle: string,
-  google: ReturnType<typeof createGoogle>,
+  client: GoogleGenAI,
 ): Promise<Topic[]> {
   if (section.skipLlm || !section.text.trim()) {
     return [fallbackTopic(section)];
   }
 
-  const { output } = await generateText({
-    model: google("gemini-3.6-flash"),
-    output: Output.object({
-      schema: sectionTopicsSchema,
-      name: "SectionTopics",
-      description:
-        "Concrete policy or budget topics found in one chapter of a public document.",
-    }),
-    system: `You explain policy documents to the public.
+  const interaction = await client.interactions.create({
+    model: MODEL,
+    store: false,
+    system_instruction: `You explain policy documents to the public.
 
 Rules:
 - Only use information in this section. Do not invent numbers, dates, or laws.
@@ -109,16 +111,29 @@ Rules:
 - source_references.section should be the chapter heading you were given.
 - Omit a field rather than guessing. effective_date can be a year or a phrase if no calendar date is given.
 - Write at a grade-school reading level.`,
-    prompt: `Document: ${documentTitle}
+    input: `Document: ${documentTitle}
 Chapter: ${section.heading}
 PDF pages: ${section.startPage}-${section.endPage}
 
 Extract the public-facing topics in this chapter.
 
 ${section.text}`,
+    response_format: [
+      {
+        type: "text",
+        mime_type: "application/json",
+        schema: jsonSchema(),
+      },
+    ],
   });
 
-  return output.topics.map((topic) => ({
+  if (!interaction.output_text) {
+    throw new Error(`Gemini returned no text for ${section.heading}.`);
+  }
+
+  const parsed = sectionTopicsSchema.parse(JSON.parse(interaction.output_text));
+
+  return parsed.topics.map((topic) => ({
     ...topic,
     source_references:
       topic.source_references && topic.source_references.length > 0
@@ -150,11 +165,11 @@ export async function processDocument(slug: string): Promise<DocumentDigest> {
     throw new Error("Could not extract any text from this document.");
   }
 
-  const google = createGoogle({ apiKey: key });
+  const client = new GoogleGenAI({ apiKey: key });
   const digestSections: DocumentDigest["sections"] = [];
 
   for (const section of sections) {
-    const topics = await summarizeSection(section, bill.title, google);
+    const topics = await summarizeSection(section, bill.title, client);
     digestSections.push({
       title: section.title,
       heading: section.heading,
@@ -186,7 +201,7 @@ export async function processDocument(slug: string): Promise<DocumentDigest> {
       title: bill.title,
       source_file: bill.file,
       processed_at: new Date().toISOString(),
-      model: "gemini-2.5-flash",
+      model: MODEL,
     },
     sections: digestSections,
   };
