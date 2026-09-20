@@ -18,8 +18,8 @@ export default async function ProcessPage() {
         </p>
         <p className="mt-3 text-sm leading-6 text-(--muted)">
           A 300-page budget can take several minutes. Watch the log under the
-          card. If Gemini is busy, the job retries automatically and Continue
-          picks up saved chapters.
+          card. If Gemini is busy, the job retries, then falls back to OpenAI
+          or Groq if those keys are set. Continue picks up saved chapters.
         </p>
       </section>
 

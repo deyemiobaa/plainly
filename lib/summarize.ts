@@ -10,7 +10,9 @@ import { extractDocumentPages } from "@/lib/extract";
 import { detectSections, type DetectedSection } from "@/lib/sections";
 import type { DigestSection, DocumentDigest, Topic } from "@/lib/types";
 
-const MODEL = "gemini-3.8-flash";
+const GEMINI_MODEL = "gemini-3.5-flash-lite";
+const OPENAI_MODEL = "gpt-4o-mini";
+const GROQ_MODEL = "llama-3.3-70b-versatile";
 const RETRY_DELAYS_MS = [5_000, 15_000, 45_000];
 
 export type ProcessLogEvent = {
@@ -21,7 +23,9 @@ export type ProcessLogEvent = {
 
 export class MissingApiKeyError extends Error {
   constructor() {
-    super("Add a GEMINI_API_KEY in .env.local to process a document.");
+    super(
+      "Add a GEMINI_API_KEY, OPENAI_API_KEY, or GROQ_API_KEY in .env.local to process a document.",
+    );
     this.name = "MissingApiKeyError";
   }
 }
@@ -57,9 +61,33 @@ const sectionTopicsSchema = z.object({
 
 type LogFn = (event: Omit<ProcessLogEvent, "ts">) => void;
 
-function apiKey() {
+function geminiKey() {
   return process.env.GEMINI_API_KEY;
 }
+
+function openaiKey() {
+  return process.env.OPENAI_API_KEY;
+}
+
+function groqKey() {
+  return process.env.GROQ_API_KEY;
+}
+
+const SYSTEM_INSTRUCTION = `You turn policy documents into summaries the average person can understand.
+Rules:
+- Only use information in this section. Do not invent numbers, dates, or laws.
+- Skip ceremonial greetings, applause lines, wordy or lengthy legal jargon, and repeated slogans.
+- Split the section into distinct topics the public can scan. A long chapter may yield several topics. A speechy chapter may yield one, or none.
+- plain_summary should proioritize touching on the impact of the section. what is changing, who is affected, and why it matters.
+- Prefer concrete money, taxes, programmes, dates, and obligations..
+- who_is_affected should be ordinary groups (students, traders, farmers, workers, patients), not ministries unless that is the point.
+- when writing why_it_matters, focus on the impact on the average person or group of people. This section should strictly contain NOT more than 200 words.
+- key_changes should be be a direct quote from the section. Do not make up or invent changes. Rather paraphrase the change in words let the affected persons or group understand the change.
+- source_references.pages must be page numbers from the "--- Page N ---" markers in the text, like "120-124" or "157".
+- source_references.section should be the chapter heading you were given.
+- Omit a field rather than guessing. effective_date can be a year or a phrase if no calendar date is given.
+- Write at a grade-school reading level.
+- Respond with JSON of the form { "topics": [ ... ] }.`;
 
 function jsonSchema() {
   const schema = z.toJSONSchema(sectionTopicsSchema) as Record<string, unknown>;
@@ -198,52 +226,18 @@ function ensureTopics(section: DetectedSection, topics: Topic[]): Topic[] {
   ];
 }
 
-async function summarizeSection(
-  section: DetectedSection,
-  documentTitle: string,
-  client: GoogleGenAI,
-): Promise<Topic[]> {
-  if (section.skipLlm || !section.text.trim()) {
-    return [fallbackTopic(section)];
-  }
-
-  const interaction = await client.interactions.create({
-    model: MODEL,
-    store: false,
-    service_tier: "flex",
-    system_instruction: `You explain policy documents to the public.
-
-Rules:
-- Only use information in this section. Do not invent numbers, dates, or laws.
-- Skip ceremonial greetings, applause lines, and repeated slogans.
-- Split the section into distinct topics the public can scan. A long chapter may yield several topics. A speechy chapter may yield one, or none.
-- Prefer concrete money, taxes, programmes, dates, and obligations.
-- who_is_affected should be ordinary groups (students, traders, farmers, workers, patients), not ministries unless that is the point.
-- source_references.pages must be page numbers from the "--- Page N ---" markers in the text, like "120-124" or "157".
-- source_references.section should be the chapter heading you were given.
-- Omit a field rather than guessing. effective_date can be a year or a phrase if no calendar date is given.
-- Write at a grade-school reading level.`,
-    input: `Document: ${documentTitle}
+function userPrompt(section: DetectedSection, documentTitle: string) {
+  return `Document: ${documentTitle}
 Chapter: ${section.heading}
 PDF pages: ${section.startPage}-${section.endPage}
 
 Extract the public-facing topics in this chapter.
 
-${section.text}`,
-    response_format: [
-      {
-        type: "text",
-        mime_type: "application/json",
-        schema: jsonSchema(),
-      },
-    ],
-  });
+${section.text}`;
+}
 
-  if (!interaction.output_text) {
-    throw new Error(`Gemini returned no text for ${section.heading}.`);
-  }
-
-  const parsed = sectionTopicsSchema.parse(JSON.parse(interaction.output_text));
+function topicsFromJson(raw: string, section: DetectedSection): Topic[] {
+  const parsed = sectionTopicsSchema.parse(JSON.parse(raw));
 
   return parsed.topics.map((topic) => ({
     ...topic,
@@ -257,6 +251,177 @@ ${section.text}`,
             },
           ],
   }));
+}
+
+function isPriorityUnavailable(error: unknown): boolean {
+  const message = errorMessage(error);
+  return (
+    errorStatus(error) === 400 &&
+    /service_tier|priority|INVALID_ARGUMENT/i.test(message)
+  );
+}
+
+async function summarizeWithGemini(
+  section: DetectedSection,
+  documentTitle: string,
+  client: GoogleGenAI,
+  serviceTier?: "priority",
+): Promise<Topic[]> {
+  const interaction = await client.interactions.create({
+    model: GEMINI_MODEL,
+    store: false,
+    ...(serviceTier ? { service_tier: serviceTier } : {}),
+    system_instruction: SYSTEM_INSTRUCTION,
+    input: userPrompt(section, documentTitle),
+    response_format: [
+      {
+        type: "text",
+        mime_type: "application/json",
+        schema: jsonSchema(),
+      },
+    ],
+  });
+
+  if (!interaction.output_text) {
+    throw new Error(`Gemini returned no text for ${section.heading}.`);
+  }
+
+  return topicsFromJson(interaction.output_text, section);
+}
+
+async function summarizeWithOpenAICompatible({
+  baseUrl,
+  apiKey,
+  model,
+  section,
+  documentTitle,
+}: {
+  baseUrl: string;
+  apiKey: string;
+  model: string;
+  section: DetectedSection;
+  documentTitle: string;
+}): Promise<Topic[]> {
+  const response = await fetch(`${baseUrl}/chat/completions`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      model,
+      temperature: 0.2,
+      response_format: { type: "json_object" },
+      messages: [
+        { role: "system", content: SYSTEM_INSTRUCTION },
+        { role: "user", content: userPrompt(section, documentTitle) },
+      ],
+    }),
+  });
+
+  const body = await response.text();
+  if (!response.ok) {
+    const error = new Error(`${response.status} ${body.slice(0, 400)}`);
+    (error as { status?: number }).status = response.status;
+    throw error;
+  }
+
+  const payload = JSON.parse(body) as {
+    choices?: { message?: { content?: string } }[];
+  };
+  const content = payload.choices?.[0]?.message?.content;
+  if (!content) {
+    throw new Error(`${model} returned no text for ${section.heading}.`);
+  }
+
+  return topicsFromJson(content, section);
+}
+
+async function summarizeSection(
+  section: DetectedSection,
+  documentTitle: string,
+  client: GoogleGenAI | null,
+  log: LogFn,
+  label: string,
+  modelsUsed: Set<string>,
+): Promise<Topic[]> {
+  if (section.skipLlm || !section.text.trim()) {
+    return [fallbackTopic(section)];
+  }
+
+  if (client && geminiKey()) {
+    let geminiError: unknown;
+    try {
+      const topics = await withRetry(
+        `${label} · ${GEMINI_MODEL} (priority)`,
+        log,
+        () => summarizeWithGemini(section, documentTitle, client, "priority"),
+      );
+      modelsUsed.add(GEMINI_MODEL);
+      return topics;
+    } catch (error) {
+      geminiError = error;
+    }
+
+    if (isPriorityUnavailable(geminiError)) {
+      log({
+        type: "retry",
+        message: `${label} · priority unavailable, retrying Gemini on standard.`,
+      });
+      try {
+        const topics = await withRetry(`${label} · ${GEMINI_MODEL}`, log, () =>
+          summarizeWithGemini(section, documentTitle, client),
+        );
+        modelsUsed.add(GEMINI_MODEL);
+        return topics;
+      } catch (error) {
+        geminiError = error;
+      }
+    }
+
+    const openai = openaiKey();
+    const groq = groqKey();
+    if (!isRetryable(geminiError) || (!openai && !groq)) {
+      throw geminiError;
+    }
+
+    log({
+      type: "retry",
+      message: `${label} · Gemini still unavailable (${errorMessage(geminiError)}). Switching fallback.`,
+    });
+  }
+
+  const openai = openaiKey();
+  if (openai) {
+    const topics = await withRetry(`${label} · ${OPENAI_MODEL}`, log, () =>
+      summarizeWithOpenAICompatible({
+        baseUrl: "https://api.openai.com/v1",
+        apiKey: openai,
+        model: OPENAI_MODEL,
+        section,
+        documentTitle,
+      }),
+    );
+    modelsUsed.add(OPENAI_MODEL);
+    return topics;
+  }
+
+  const groq = groqKey();
+  if (groq) {
+    const topics = await withRetry(`${label} · ${GROQ_MODEL}`, log, () =>
+      summarizeWithOpenAICompatible({
+        baseUrl: "https://api.groq.com/openai/v1",
+        apiKey: groq,
+        model: GROQ_MODEL,
+        section,
+        documentTitle,
+      }),
+    );
+    modelsUsed.add(GROQ_MODEL);
+    return topics;
+  }
+
+  throw new MissingApiKeyError();
 }
 
 export async function processDocument({
@@ -277,10 +442,21 @@ export async function processDocument({
     throw new DocumentNotFoundError(slug);
   }
 
-  const key = apiKey();
-  if (!key) {
+  const key = geminiKey();
+  if (!key && !openaiKey() && !groqKey()) {
     throw new MissingApiKeyError();
   }
+
+  const fallbacks = [
+    openaiKey() ? OPENAI_MODEL : null,
+    groqKey() ? GROQ_MODEL : null,
+  ].filter((model): model is string => Boolean(model));
+  log({
+    type: "info",
+    message: key
+      ? `Using ${GEMINI_MODEL} (priority)${fallbacks.length ? `; fallback ${fallbacks.join(", ")}` : ""}.`
+      : `Gemini key missing. Using fallback ${fallbacks.join(", ")}.`,
+  });
 
   log({ type: "info", message: `Extracting ${bill.filename}…` });
   const pages = await extractDocumentPages(absoluteBillPath(bill.filename));
@@ -298,7 +474,7 @@ export async function processDocument({
   const skippedCount = sections.length - llmCount;
   log({
     type: "info",
-    message: `Found ${sections.length} chapters (${llmCount} to send to Gemini, ${skippedCount} skipped).`,
+    message: `Found ${sections.length} chapters (${llmCount} to send to the model, ${skippedCount} skipped).`,
   });
 
   const existing = fresh ? null : await readDigest(slug);
@@ -313,7 +489,8 @@ export async function processDocument({
     });
   }
 
-  const client = new GoogleGenAI({ apiKey: key });
+  const client = key ? new GoogleGenAI({ apiKey: key }) : null;
+  const modelsUsed = new Set<string>();
   const digestSections: DigestSection[] = [];
 
   const digest: DocumentDigest = {
@@ -322,7 +499,7 @@ export async function processDocument({
       title: bill.title,
       source_file: bill.file,
       processed_at: new Date().toISOString(),
-      model: MODEL,
+      model: GEMINI_MODEL,
     },
     sections: digestSections,
   };
@@ -338,16 +515,21 @@ export async function processDocument({
     }
 
     if (section.skipLlm || !section.text.trim()) {
-      log({ type: "info", message: `${label} · skipped (no Gemini call).` });
+      log({ type: "info", message: `${label} · skipped (no model call).` });
     } else {
-      log({ type: "info", message: `${label} · calling Gemini…` });
+      log({ type: "info", message: `${label} · calling model…` });
     }
 
     const started = Date.now();
     const topics = ensureTopics(
       section,
-      await withRetry(label, log, () =>
-        summarizeSection(section, bill.title, client),
+      await summarizeSection(
+        section,
+        bill.title,
+        client,
+        log,
+        label,
+        modelsUsed,
       ),
     );
     const elapsedSec = Math.max(1, Math.round((Date.now() - started) / 1000));
@@ -362,6 +544,7 @@ export async function processDocument({
     });
 
     digest.document.processed_at = new Date().toISOString();
+    digest.document.model = [...modelsUsed].join(", ") || GEMINI_MODEL;
     await writeDigest(slug, digest);
 
     if (!section.skipLlm && section.text.trim()) {

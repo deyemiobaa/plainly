@@ -3,8 +3,8 @@
     "slug": "2026-Budget-Statement-and-Economic-Policy",
     "title": "The Budget Statement and Economic Policy of the Government of Ghana for the 2026 Financial Year",
     "source_file": "/bills/2026-Budget-Statement-and-Economic-Policy.pdf",
-    "processed_at": "2026-09-18T17:43:51.534Z",
-    "model": "gemini-3.8-flash"
+    "processed_at": "2026-09-20T17:31:34.268Z",
+    "model": "gemini-3.5-flash-lite"
   },
   "sections": [
     {
@@ -21,6 +21,965 @@
             {
               "pages": "2-16",
               "section": "Front matter"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "INTRODUCTION",
+      "heading": "SECTION 1: INTRODUCTION",
+      "pages": "17-20",
+      "startPage": 17,
+      "endPage": 20,
+      "topics": [
+        {
+          "title": "2026 Budget Presentation and Statutory Reports",
+          "plain_summary": "The government presented the 2026 Budget Statement and Economic Policy, along with required annual reports on petroleum funds and the African Union Import Levy, for parliamentary approval.",
+          "why_it_matters": "This budget sets the financial and economic rules for the entire country for the year, dictating how public funds are managed and which sectors receive government attention.",
+          "who_is_affected": [
+            "workers",
+            "traders",
+            "students",
+            "farmers",
+            "patients"
+          ],
+          "key_changes": [
+            "The Budget Statement and Economic Policy of Government for the year ending 31st December 2026 was moved for parliamentary approval."
+          ],
+          "effective_date": "2026 Financial Year",
+          "source_references": [
+            {
+              "pages": "17-20",
+              "section": "SECTION 1: INTRODUCTION"
+            }
+          ]
+        },
+        {
+          "title": "New Bills, Regulations, and Economic Policy Proposals",
+          "plain_summary": "The government is introducing several new bills and policy requests, including the repeal of the COVID-19 Health Recovery Levy, changes to value-added and health insurance taxes, and the implementation of an AI-powered trade data system.",
+          "why_it_matters": "Proposed tax adjustments and levies directly change what everyday citizens pay for goods, education, health services, and how government money is spent.",
+          "who_is_affected": [
+            "taxpayers",
+            "students",
+            "patients",
+            "traders",
+            "workers"
+          ],
+          "key_changes": [
+            "The Value for Money Bill",
+            "The Virtual Asset Service Providers Bill",
+            "The Value Added Tax (Amendment) Bill",
+            "The COVID-19 Health Recovery Levy (Repeal) Bill",
+            "The Ghana Education Trust Fund (GETFund) (Amendment) Bill",
+            "The National Health Insurance (Amendment) Bill",
+            "The Public Procurement Regulations",
+            "Request for approval for a Revised Investment Policy of the Ghana Petroleum Funds",
+            "Request for approval to implement an AI-powered trade data analytics system to support customs revenue mobilization."
+          ],
+          "source_references": [
+            {
+              "pages": "17-20",
+              "section": "SECTION 1: INTRODUCTION"
+            }
+          ]
+        },
+        {
+          "title": "2026 Wages and Economic Dialogue",
+          "plain_summary": "The National Minimum Wage and Base Pay for 2026 have been agreed upon in partnership with Organized Labour and employers, establishing the National Tripartite Committee as a permanent forum for economic dialogue.",
+          "why_it_matters": "Workers and employers are directly impacted by agreed wage adjustments, ensuring predictability and stability in incomes and labour relations for the year.",
+          "who_is_affected": [
+            "workers",
+            "employers"
+          ],
+          "key_changes": [
+            "Together with Government, we have successfully agreed on the National Minimum Wage and Base Pay for 2026, ahead of this Budget..."
+          ],
+          "effective_date": "2026",
+          "source_references": [
+            {
+              "pages": "17-20",
+              "section": "SECTION 1: INTRODUCTION"
+            }
+          ]
+        },
+        {
+          "title": "Strategic Priorities for Growth, Jobs, and Transformation",
+          "plain_summary": "The government outlined three main priorities for 2026: stabilizing the macroeconomy, accelerating job creation through infrastructure and agriculture, and strengthening security and social sectors like education and health.",
+          "why_it_matters": "Focusing on job creation, infrastructure, education, and health directly improves daily living conditions, public services, and economic opportunities for ordinary citizens.",
+          "who_is_affected": [
+            "farmers",
+            "students",
+            "patients",
+            "workers",
+            "traders"
+          ],
+          "key_changes": [
+            "Consolidating Macroeconomic Stability",
+            "Accelerating Economic Transformation and Job Creation",
+            "Strengthening Security and Social Sectors for Inclusive Growth"
+          ],
+          "effective_date": "2026 and beyond",
+          "source_references": [
+            {
+              "pages": "17-20",
+              "section": "SECTION 1: INTRODUCTION"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "GLOBAL ECONOMIC DEVELOPMENTS & OUTLOOK",
+      "heading": "SECTION 2: GLOBAL ECONOMIC DEVELOPMENTS & OUTLOOK",
+      "pages": "21-25",
+      "startPage": 21,
+      "endPage": 25,
+      "topics": [
+        {
+          "title": "Global Economic Developments and Inflation Outlook",
+          "plain_summary": "Global economic growth is expected to stay modest at 3.2 percent in 2025 and 3.1 percent in 2026. Across the world, inflation is gradually slowing down due to better supply chains and tighter monetary policies. In Sub-Saharan Africa, average inflation is projected to drop from 13.1 percent in 2025 to 10.9 percent in 2026, though everyday people may still face challenges from food price changes and climate shocks.",
+          "why_it_matters": "When global inflation and commodity prices change, it directly affects the cost of imported goods, food prices, and the cost of living for ordinary citizens. A drop in regional inflation means price increases could start slowing down, giving households some relief on everyday expenses.",
+          "who_is_affected": [
+            "workers",
+            "farmers",
+            "traders"
+          ],
+          "key_changes": [
+            "Headline inflation is projected to decline from 4.2 percent in 2025 to 3.7 percent in 2026.",
+            "In Sub-Saharan Africa, average inflation is forecast to ease from 13.1 percent in 2025 to 10.9 percent in 2026."
+          ],
+          "effective_date": "2025-2026",
+          "source_references": [
+            {
+              "pages": "21-23",
+              "section": "SECTION 2: GLOBAL ECONOMIC DEVELOPMENTS & OUTLOOK"
+            }
+          ]
+        },
+        {
+          "title": "Commodity Market Trends and Prices",
+          "plain_summary": "Global commodity prices are seeing mixed trends. Crude oil and gold prices are shifting, while cocoa prices spiked due to poor weather and lower production in West Africa, though prices are expected to stabilize as supply improves.",
+          "why_it_matters": "Changes in global commodity prices directly impact farmers who grow cash crops like cocoa, as well as businesses and consumers who rely on fuel and imported goods tied to global oil prices.",
+          "who_is_affected": [
+            "farmers",
+            "traders"
+          ],
+          "key_changes": [
+            "Brent crude oil prices are expected to average US$68 per barrel in 2025, down from US$79 in 2024.",
+            "Cocoa prices have surged to an average of US$7,800 per metric tonne in 2025, up from US$5,900 in 2024, due to adverse weather and production shortfalls in West Africa."
+          ],
+          "effective_date": "2025-2026",
+          "source_references": [
+            {
+              "pages": "23",
+              "section": "SECTION 2: GLOBAL ECONOMIC DEVELOPMENTS & OUTLOOK"
+            }
+          ]
+        },
+        {
+          "title": "Ghana's Progress Toward ECOWAS Convergence",
+          "plain_summary": "Ghana has made strong improvements in meeting regional economic goals, successfully hitting five out of six ECOWAS convergence criteria by late 2025. This includes keeping the budget deficit low, maintaining healthy foreign reserves, stopping central bank budget financing, stabilizing public debt, and seeing a stable exchange rate.",
+          "why_it_matters": "Meeting these regional financial targets shows that the national economy is stabilizing. For the average person, a stable exchange rate, controlled public debt, and zero central bank borrowing help protect the value of money and support a more predictable economic environment.",
+          "who_is_affected": [
+            "workers",
+            "traders",
+            "citizens"
+          ],
+          "key_changes": [
+            "In 2025, the fiscal deficit is projected at 2.8 percent of GDP, below the 3 percent benchmark;",
+            "Gross external reserves now cover 4.8 months of imports, exceeding the minimum threshold of three months;",
+            "Central Bank financing of the budget remains at zero, compared to the regional ceiling of 10 percent of previous year’s revenue;"
+          ],
+          "effective_date": "2025",
+          "source_references": [
+            {
+              "pages": "24-25",
+              "section": "SECTION 2: GLOBAL ECONOMIC DEVELOPMENTS & OUTLOOK"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "STATE OF GHANA’S ECONOMY IN 2025",
+      "heading": "SECTION 3: STATE OF GHANA’S ECONOMY IN 2025",
+      "pages": "26-63",
+      "startPage": 26,
+      "endPage": 63,
+      "topics": [
+        {
+          "title": "Macroeconomic Performance and Economic Growth",
+          "plain_summary": "Ghana's economy grew strongly in the first half of 2025, driven mainly by the services and agriculture sectors. Inflation dropped sharply, bringing price relief to ordinary households and businesses.",
+          "why_it_matters": "The drop in inflation and the lowering of borrowing costs make everyday goods more affordable and make it easier for businesses and ordinary people to access credit. This economic recovery helps restore purchasing power and improves the standard of living for everyday families.",
+          "who_is_affected": [
+            "households",
+            "businesses",
+            "farmers",
+            "students"
+          ],
+          "key_changes": [
+            "Overall GDP expanded by 6.3 percent in the first half of 2025, up from 5.1 percent during the same period in 2024.",
+            "Inflation fell from 23.8 percent in December 2024 to 8 percent in October 2025, returning Ghana to single-digit inflation.",
+            "The Bank of Ghana reduced the monetary policy rate from 28 percent to 21.5 percent."
+          ],
+          "effective_date": "2025",
+          "source_references": [
+            {
+              "pages": "26-28",
+              "section": "SECTION 3: STATE OF GHANA’S ECONOMY IN 2025"
+            }
+          ]
+        },
+        {
+          "title": "Fiscal Performance and Public Debt Reduction",
+          "plain_summary": "The government achieved a major turnaround in public finances by cutting wasteful spending, increasing tax compliance, and reducing the country's public debt ratio.",
+          "why_it_matters": "Lower public debt and disciplined government spending free up money for vital social programs, schools, and hospitals instead of paying heavy interest on debt. This fiscal responsibility brings greater stability to the economy.",
+          "who_is_affected": [
+            "taxpayers",
+            "workers",
+            "traders"
+          ],
+          "key_changes": [
+            "Public debt to GDP ratio reduced from 68.9 percent at the end of September 2024 to 45.0 percent a year later.",
+            "The primary balance on a commitment basis improved from a deficit of 3.0 percent of GDP in 2024 to a surplus of 1.6 percent by September 2025.",
+            "Short-term interest rates fell sharply, with the 91-day Treasury-bill rate declining from about 29 percent to around 10.6 percent."
+          ],
+          "effective_date": "2025",
+          "source_references": [
+            {
+              "pages": "31-34",
+              "section": "SECTION 3: STATE OF GHANA’S ECONOMY IN 2025"
+            }
+          ]
+        },
+        {
+          "title": "Energy Sector and COCOBOD Reforms",
+          "plain_summary": "The government renegotiated costly power contracts and reformed the cocoa sector to clear debts, protect farmer incomes, and ensure a stable supply of electricity.",
+          "why_it_matters": "Higher cocoa prices directly reward farmers for their hard work and protect their incomes. Meanwhile, reforms in the power sector prevent massive government debts from accumulating, leading to a reliable electricity supply for homes and businesses.",
+          "who_is_affected": [
+            "farmers",
+            "electricity consumers",
+            "businesses"
+          ],
+          "key_changes": [
+            "Successfully renegotiated Power Purchase Agreements with Independent Power Producers, saving the nation over US$250 million.",
+            "Set the producer price of cocoa at GH¢58,000 per tonne for the 2025/26 crop season.",
+            "Rationalized cocoa roads contracts from GH¢21 billion to GH¢6 billion."
+          ],
+          "effective_date": "2025/2026 crop season",
+          "source_references": [
+            {
+              "pages": "42-44",
+              "section": "SECTION 3: STATE OF GHANA’S ECONOMY IN 2025"
+            }
+          ]
+        },
+        {
+          "title": "Exchange Rate and External Sector Improvements",
+          "plain_summary": "Ghana's currency strengthened significantly against major foreign currencies due to higher export earnings from gold and cocoa, alongside strict management of imports.",
+          "why_it_matters": "A stronger Cedi lowers the cost of imported goods, reduces fuel price inflation, and makes it cheaper for the country to pay its foreign debts. This helps stabilize market prices for everyday shoppers.",
+          "who_is_affected": [
+            "importers",
+            "traders",
+            "consumers"
+          ],
+          "key_changes": [
+            "The Ghana Cedi appreciated by 34.6 percent against the US Dollar, 28.0 percent against the British Pound, and 20.5 percent against the Euro as of November 2025.",
+            "Gross international reserves rose to approximately US$11.4 billion, providing about 4.8 months of import cover."
+          ],
+          "effective_date": "2025",
+          "source_references": [
+            {
+              "pages": "56-57",
+              "section": "SECTION 3: STATE OF GHANA’S ECONOMY IN 2025"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SECTORAL PERFORMANCE",
+      "heading": "SECTION 4: SECTORAL PERFORMANCE",
+      "pages": "64-104",
+      "startPage": 64,
+      "endPage": 104,
+      "topics": [
+        {
+          "title": "Administration Sector and Office of Government Machinery",
+          "plain_summary": "The Administration Sector focuses on strengthening democratic institutions, public financial management, and decentralisation. The Office of Government Machinery manages strategic leadership, state protocol, investor relations through the GIPC, enterprise support via MASLOC, and higher education access through the Scholarship Secretariat.",
+          "why_it_matters": "Ordinary citizens benefit from enhanced government accountability, improved access to local and international education funding, business growth support for small enterprises, and more efficient public services designed to reduce bureaucratic hurdles.",
+          "who_is_affected": [
+            "Students",
+            "Micro-entrepreneurs",
+            "Investors",
+            "Public sector workers"
+          ],
+          "key_changes": [
+            "In 2026, the Secretariat will scale up human capital development, with a renewed focus on science, technology, and ICT education as key enablers of innovation and competitiveness.",
+            "In 2026, the Secretariat will broaden scholarship coverage to include emerging fields like digital innovation, climate science, and biotechnology...",
+            "In 2026, the Public Sector Reform Secretariat will operationalise the National Public Sector Reform Strategy II (NPSRS II)..."
+          ],
+          "effective_date": "2026",
+          "source_references": [
+            {
+              "pages": "64-66",
+              "section": "SECTION 4: SECTORAL PERFORMANCE"
+            }
+          ]
+        },
+        {
+          "title": "Civil Service, Parliament, Audit Service, and Public Services",
+          "plain_summary": "The structure of Government was streamlined into 23 Ministries. Parliament passed 27 bills and implemented new Standing Orders. The Audit Service recovered misappropriated public funds and tackled payroll fraud, while the Public Services Commission advanced the roll-out of the Human Resource Management Information System (HRMIS).",
+          "why_it_matters": "These changes improve the efficiency, integrity, and transparency of government operations. Removing ghost names from payrolls and auditing public funds protects taxpayer money and ensures public resources are directed toward meaningful national development.",
+          "who_is_affected": [
+            "Civil servants",
+            "Public sector workers",
+            "Citizens"
+          ],
+          "key_changes": [
+            "In 2026, the Office will embark on a review of the Civil Service Act, 1993 (PNDCL 327) and the Civil Service Regulations, 1960...",
+            "In 2026, the Commission will complete the rollout of the HRMIS to all MDAs and MMDAs, conduct a comprehensive Human Resource Audit across government institutions...",
+            "In 2026, the Audit Service will scale up its audit operations by conducting comprehensive financial, compliance, and performance audits across all MDAs, MMDAs, and State-Owned Enterprises."
+          ],
+          "effective_date": "2026",
+          "source_references": [
+            {
+              "pages": "66-70",
+              "section": "SECTION 4: SECTORAL PERFORMANCE"
+            }
+          ]
+        },
+        {
+          "title": "Foreign Affairs, Finance, and Ghana Gold Board",
+          "plain_summary": "The Ministry of Foreign Affairs improved passport services and rolled out chip-embedded biometric passports. The Ministry of Finance strengthened fiscal discipline, pushed debt strategies, and managed climate finance projects. The Ghana Gold Board spearheaded gold value chain reforms, achieving record small-scale gold exports and supporting reserve accumulation.",
+          "why_it_matters": "Citizens benefit from secure, internationally compliant travel documents, better-regulated economic policies, and enhanced financial stability. Small-scale gold miners operate under clear, formalized frameworks that boost national economic growth and foreign exchange reserves.",
+          "who_is_affected": [
+            "Travellers",
+            "Small-scale miners",
+            "Traders",
+            "General public"
+          ],
+          "key_changes": [
+            "A major breakthrough came with the rollout of chip-embedded biometric passports on 28th April 2025...",
+            "Looking ahead, 2026 will mark the rollout of the Ministry’s Strategic Transition from Renting to Infrastructure Development (STRIDE) initiative...",
+            "Beginning in 2026, it will roll out a comprehensive Gold Traceability System, ensuring every gram of gold purchased can be traced..."
+          ],
+          "effective_date": "2026",
+          "source_references": [
+            {
+              "pages": "70-75",
+              "section": "SECTION 4: SECTORAL PERFORMANCE"
+            }
+          ]
+        },
+        {
+          "title": "Local Government, Media, and Planning Commissions",
+          "plain_summary": "The Ministry of Local Government advanced decentralisation, local economic development, social safety nets, and urban spatial planning. The National Media Commission, National Development Planning Commission, and Right to Information Commission worked to enforce regulatory compliance, media responsibility, long-term development planning, and citizens' access to public information.",
+          "why_it_matters": "Communities experience better local governance, improved infrastructure, and cleaner environments. Citizens gain easier access to public information through newly opened regional RTI offices, strengthening their ability to participate in national democracy.",
+          "who_is_affected": [
+            "Local communities",
+            "Assembly members",
+            "Media operators",
+            "Citizens seeking public information"
+          ],
+          "key_changes": [
+            "In 2026, the 10th Cycle of DPAT will introduce a new performance tracker to align MMDCEs’ performance indicators...",
+            "In 2026, the Commission will operationalise Regional Complaints Settlement Offices to decentralise complaint handling...",
+            "In 2026, the RTIC will open five new regional offices in Cape Coast, Ho, Takoradi, Koforidua, and Tamale."
+          ],
+          "effective_date": "2026",
+          "source_references": [
+            {
+              "pages": "75-80",
+              "section": "SECTION 4: SECTORAL PERFORMANCE"
+            }
+          ]
+        },
+        {
+          "title": "Agriculture, Fisheries, and Lands Management",
+          "plain_summary": "Agriculture serves as the economic anchor through the Feed Ghana Programme, vegetable development, and irrigation projects. The Ministry of Fisheries upgraded biosecurity, passed new acts, and targeted aquaculture growth. The Ministry of Lands improved land registration through digital systems, promoted reforestation, and intensified anti-illegal mining operations.",
+          "why_it_matters": "Farmers and fishermen receive crucial inputs, technical training, and better storage facilities, which lower food price volatility and secure livelihoods. Landowners benefit from automated registration systems that reduce litigation, while strict enforcement against illegal mining protects water bodies and the environment.",
+          "who_is_affected": [
+            "Farmers",
+            "Fishermen",
+            "Fish farmers",
+            "Landowners",
+            "Small-scale miners"
+          ],
+          "key_changes": [
+            "In 2026 we will supply 4,388 mt of maize seed, 31,000 mt of rice seed, 240 mt of sorghum seed, 2,791 mt of soybean seed, and 272,000 mt of fertilisers...",
+            "In 2026, Government will introduce new Regulations to guide vessel licensing, aquaculture operations, surveillance, and post-harvest practices...",
+            "In 2026, we will revise the National Land Policy and Lands Commission Act, and finalise the Legislative Instrument for the Land Act..."
+          ],
+          "effective_date": "2026",
+          "source_references": [
+            {
+              "pages": "80-86",
+              "section": "SECTION 4: SECTORAL PERFORMANCE"
+            }
+          ]
+        },
+        {
+          "title": "Trade, Industry, Tourism, Environment, and Energy",
+          "plain_summary": "The Ministry of Trade drove industrialization through the Ghana FIRST framework and the Accelerated Export Development Programme. Tourism focused on heritage preservation. Environmental policies introduced green financing and carbon management. Energy initiatives expanded electricity access, explored petroleum and nuclear power, and promoted clean cooking and e-mobility.",
+          "why_it_matters": "Local businesses and exporters gain expanded market access across Africa, boosting job creation. Consumers benefit from a reliable energy supply, affordable electricity tariffs, clean cooking solutions, and environmental protections that combat climate change.",
+          "who_is_affected": [
+            "Exporters",
+            "MSMEs",
+            "Industrial workers",
+            "Energy consumers"
+          ],
+          "key_changes": [
+            "In 2026, Government will complete the review of the AfCFTA National Policy Framework and support at least 200 MSMEs to access new markets...",
+            "In 2026, the Authority will issue about 80 new licenses in 2026 and intensify international investment promotion.",
+            "In 2026, large-scale distribution [of LPG cookstoves] will begin nationwide."
+          ],
+          "effective_date": "2026",
+          "source_references": [
+            {
+              "pages": "85-90",
+              "section": "SECTION 4: SECTORAL PERFORMANCE"
+            }
+          ]
+        },
+        {
+          "title": "Infrastructure Sector: Roads, Railways, Housing, Water, and Transport",
+          "plain_summary": "Infrastructure investments connected communities and industries through road construction, railway rehabilitation, affordable housing projects, water and sanitation system upgrades, and digital and mass transport enhancements.",
+          "why_it_matters": "Improved roads, rail networks, and mass transport systems reduce travel times and shipping costs for goods. Citizens gain better access to safe drinking water, affordable housing schemes, sanitation facilities, and reliable digital connectivity.",
+          "who_is_affected": [
+            "Commuters",
+            "Traders",
+            "Home seekers",
+            "Urban and rural residents"
+          ],
+          "key_changes": [
+            "The 2026 programme targets maintenance of an additional 25,000 kilometres [of roads], alongside completion of all major ongoing highway projects.",
+            "A total of 8,000 units are expected to be made habitable under the first phase [of Saglemi Affordable Housing] in 2026.",
+            "In 2026, work will continue on the Sekondi-Takoradi and Sunyani Water Supply Projects, targeting an additional 1.2 million beneficiaries."
+          ],
+          "effective_date": "2026",
+          "source_references": [
+            {
+              "pages": "90-93",
+              "section": "SECTION 4: SECTORAL PERFORMANCE"
+            }
+          ]
+        },
+        {
+          "title": "Social Sector: Education, Labour, Sports, Youth, Health, and Social Protection",
+          "plain_summary": "The Social Sector enhanced basic and tertiary education, teacher welfare, and TVET training. It maintained industrial peace, expanded sports development, promoted youth empowerment, advanced universal health coverage with hospital rehabilitations, and enforced social protection laws for vulnerable groups.",
+          "why_it_matters": "Students receive a modernized, skills-focused education alongside expanded healthcare access through new hospitals and fee policies. Workers enjoy industrial harmony, while vulnerable citizens and victims of trafficking receive structured social protection and welfare support.",
+          "who_is_affected": [
+            "Students",
+            "Teachers",
+            "Workers",
+            "Patients",
+            "Vulnerable citizens"
+          ],
+          "key_changes": [
+            "In 2026, Government will overhaul the basic school curriculum from kindergarten to primary six to equip learners with practical skills...",
+            "In 2026, the [Scholarship/Education] programme will be extended to Senior High Schools nationwide [for sanitary pads distribution].",
+            "In 2026, Government will continue rebuilding La General Hospital, establish six regional hospitals, expand CHPS compounds, and modernise medical equipment nationwide."
+          ],
+          "effective_date": "2026",
+          "source_references": [
+            {
+              "pages": "94-100",
+              "section": "SECTION 4: SECTORAL PERFORMANCE"
+            }
+          ]
+        },
+        {
+          "title": "Public Safety Sector: Justice, Defence, Law Enforcement, and Anti-Corruption",
+          "plain_summary": "The Public Safety Sector focused on protecting citizens, fighting crime, and upholding the rule of law. The Attorney-General handled prosecutions and legal drafting, EOCO and the OSP recovered misappropriated public funds, the military secured borders, and police and immigration services maintained internal security and border control.",
+          "why_it_matters": "Effective law enforcement, reduced court backlogs, and aggressive anti-corruption investigations protect public finances and ensure a secure environment. Vulnerable individuals receive free legal aid to access justice fairly.",
+          "who_is_affected": [
+            "Citizens",
+            "Law-abiding residents",
+            "Vulnerable people seeking legal aid"
+          ],
+          "key_changes": [
+            "In 2026, the Ministry [of Justice] will defend about 400 civil suits, review 100 agreements and contracts, and prosecute at least 1,700 criminal cases...",
+            "In 2026, EOCO will investigate about 450 cases, prosecute over 20, and recover an estimated GH¢250 million.",
+            "In 2026, CHRAJ will conduct corruption risk assessments for the Lands Commission and the Ministry of Roads and Highways."
+          ],
+          "effective_date": "2026",
+          "source_references": [
+            {
+              "pages": "100-104",
+              "section": "SECTION 4: SECTORAL PERFORMANCE"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "2026 MEDIUM-TERM POLICY OBJECTIVES AND TARGETS",
+      "heading": "SECTION 5: 2026 MEDIUM-TERM POLICY OBJECTIVES AND TARGETS",
+      "pages": "105-119",
+      "startPage": 105,
+      "endPage": 119,
+      "topics": [
+        {
+          "title": "2026 Macroeconomic and Fiscal Targets",
+          "plain_summary": "The government has established macroeconomic targets for 2026 and the medium-term to maintain economic stability, control inflation, and support sustainable growth. For 2026, the overall real GDP growth is targeted at at least 4.8 percent, end-year inflation is expected to reach 8.0 percent, and a primary surplus of 1.5 percent of GDP is set on a commitment basis. Total revenue and grants are projected at GH¢268.1 billion, while total expenditure on a commitment basis is programmed at GH¢302.5 billion (or an appropriation total of GH¢357,105,639,079.87). Public servants will receive a 9 percent negotiated increase in base pay under the Single Spine Salary Structure.",
+          "why_it_matters": "These targets and fiscal allocations directly influence the cost of living, employment opportunities, and public service delivery for average citizens. Controlling inflation at 8 percent helps protect household purchasing power, while structured government spending aims to fund infrastructure, education, health, and social protection programs that directly benefit communities.",
+          "who_is_affected": [
+            "workers",
+            "taxpayers",
+            "businesses",
+            "ordinary citizens"
+          ],
+          "key_changes": [
+            "Overall real GDP growth of at least 4.8 percent",
+            "End-year inflation of 8.0 percent",
+            "A primary surplus of 1.5 percent of GDP on commitment basis",
+            "Total Revenue and Grants projected at GH¢268.1 billion",
+            "Total Expenditure programmed at GH¢302.5 billion on commitment basis",
+            "Total appropriation of GH¢357,105,639,079.87 for the fiscal year ending 31st December 2026"
+          ],
+          "effective_date": "2026",
+          "source_references": [
+            {
+              "pages": "107-116",
+              "section": "SECTION 5: 2026 MEDIUM-TERM POLICY OBJECTIVES AND TARGETS"
+            }
+          ]
+        },
+        {
+          "title": "Growth Drivers and Sector Investments",
+          "plain_summary": "The government is rolling out targeted policies to stimulate private sector growth, exports, and human capital development. Key initiatives include the Big Push infrastructure program focusing on roads, the Feed Ghana Programme supported by Farmers’ Service Centres and Farm Banks, the Free Secondary Education Programme, the National Apprenticeship Programme, and the National Employment Trust. Additional digital initiatives involve the One Million Coders Programme and a FinTech Growth Fund.",
+          "why_it_matters": "These growth drivers create direct opportunities for employment, skills training, and business expansion. Farmers gain better access to inputs and markets through new facilities, youth benefit from expanded digital and vocational training programs, and business owners experience improved physical infrastructure that eases trade and lowers operational costs.",
+          "who_is_affected": [
+            "farmers",
+            "students",
+            "business owners",
+            "youth",
+            "traders"
+          ],
+          "key_changes": [
+            "Implementation of the Big Push Programme focusing on road infrastructure for 2025 and 2026",
+            "Rollout of a five-year Trade Sector Support Programme",
+            "Expansion of the Free Secondary Education Programme and National Apprenticeship Programme",
+            "Launch of the Feed Ghana Programme through Farmers’ Service Centres and Farm Banks"
+          ],
+          "effective_date": "2026",
+          "source_references": [
+            {
+              "pages": "108-110",
+              "section": "SECTION 5: 2026 MEDIUM-TERM POLICY OBJECTIVES AND TARGETS"
+            }
+          ]
+        },
+        {
+          "title": "Petroleum Revenue Projections and Allocation",
+          "plain_summary": "Projected petroleum receipts for 2026 are estimated at US$985.50 million, based on a benchmark crude oil price of US$76.22 per barrel and total crude oil output of 37.95 million barrels. Out of the benchmark revenue after transfers to the national oil company, US$556.6 million is allocated to the Annual Budget Funding Amount, while US$238.6 million goes to the Ghana Petroleum Funds.",
+          "why_it_matters": "Petroleum revenues directly contribute to the national budget and fund public infrastructure and services that impact the entire population, while a portion is safely saved in petroleum funds for future generations.",
+          "who_is_affected": [
+            "citizens",
+            "taxpayers"
+          ],
+          "key_changes": [
+            "Benchmark crude oil price set at US$76.22 per barrel",
+            "Benchmark crude oil output estimated at 37.95 million barrels",
+            "Total projected petroleum receipts of US$985.50 million",
+            "Allocation of US$556.6 million to the Annual Budget Funding Amount and US$238.6 million to the Ghana Petroleum Funds"
+          ],
+          "effective_date": "2026",
+          "source_references": [
+            {
+              "pages": "116-117",
+              "section": "SECTION 5: 2026 MEDIUM-TERM POLICY OBJECTIVES AND TARGETS"
+            }
+          ]
+        },
+        {
+          "title": "Medium-Term Debt Management Strategy",
+          "plain_summary": "The government is implementing a debt management strategy for 2025–2028 to keep public borrowing sustainable and cost-effective. The strategy involves resuming benchmark bond issuances in 2026, utilizing concessional financing from multilateral partners, and enforcing strict debt limits such as capping Treasury bills and keeping short-term debt low.",
+          "why_it_matters": "Disciplined debt management lowers the country's debt-servicing burden, freeing up public funds to invest in essential services like health, education, and infrastructure rather than paying off high interest loans.",
+          "who_is_affected": [
+            "investors",
+            "taxpayers",
+            "workers"
+          ],
+          "key_changes": [
+            "Resuming benchmark bond issuance in 2026",
+            "Limiting debt maturing within one year to 15±5 percent of total debt",
+            "Capping Treasury bills at 20±5 percent of domestic debt",
+            "Restricting USD-denominated debt to no more than 70 percent of external debt"
+          ],
+          "effective_date": "2025-2028",
+          "source_references": [
+            {
+              "pages": "118-119",
+              "section": "SECTION 5: 2026 MEDIUM-TERM POLICY OBJECTIVES AND TARGETS"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "FISCAL POLICY MEASURES, STRUCTURAL REFORMS, AND KEY POLICY INITIATIVES",
+      "heading": "SECTION 6: FISCAL POLICY MEASURES, STRUCTURAL REFORMS, AND KEY POLICY INITIATIVES",
+      "pages": "120-156",
+      "startPage": 120,
+      "endPage": 156,
+      "topics": [
+        {
+          "title": "Comprehensive Value Added Tax (VAT) Reforms",
+          "plain_summary": "The government is modernising the VAT system to make it fairer, simpler, and more business-friendly. These changes reduce the effective VAT rate, eliminate specific levies and taxes on mineral prospecting, raise the threshold for small businesses, and leverage digital tools for collection.",
+          "why_it_matters": "For the average person and business owner, these changes reduce the cost of doing business and put more money directly into people's pockets—an estimated GH¢5.7 billion total for households and businesses in 2026. Raising the VAT registration threshold relieves small and micro enterprises from the heavy burden of collecting and administering VAT, while removing the COVID-19 levy lowers costs on everyday goods and services.",
+          "who_is_affected": [
+            "businesses",
+            "small and micro business owners",
+            "minerals exploration investors",
+            "households and individual consumers"
+          ],
+          "key_changes": [
+            "abolish the COVID-19 Health Recovery Levy",
+            "reduce the effective VAT rate from 21.9% to 20%",
+            "raise the VAT registration threshold from GH¢200,000 to GH¢750,000",
+            "abolish VAT on reconnaissance and prospecting of minerals"
+          ],
+          "effective_date": "2026",
+          "source_references": [
+            {
+              "pages": "121-123",
+              "section": "SECTION 6: FISCAL POLICY MEASURES, STRUCTURAL REFORMS, AND KEY POLICY INITIATIVES"
+            }
+          ]
+        },
+        {
+          "title": "Establishment of the Value for Money Office (VfMO)",
+          "plain_summary": "An independent statutory body is being established to review, certify, and sanction public contracts before money is spent. This office acts as a permanent guardian to prevent inflation of project costs, budget overruns, and waste.",
+          "why_it_matters": "This change ensures that public funds are not lost to inflated prices or abandoned projects. For the average citizen, it means public infrastructure like roads, schools, and hospitals are delivered at fair prices and higher quality, saving billions of cedis and rebuilding trust in how public money is spent.",
+          "who_is_affected": [
+            "taxpayers",
+            "public sector contractors",
+            "Ministries, Departments, and Agencies (MDAs)",
+            "Metropolitan, Municipal, and District Assemblies (MMDAs)"
+          ],
+          "key_changes": [
+            "Establishing an independent statutory VfMO with legal power to review, certify, and sanction.",
+            "A mandatory VfM Certificate will be a condition for contract award, payment, or continuation."
+          ],
+          "effective_date": "2026",
+          "source_references": [
+            {
+              "pages": "128-129",
+              "section": "SECTION 6: FISCAL POLICY MEASURES, STRUCTURAL REFORMS, AND KEY POLICY INITIATIVES"
+            }
+          ]
+        },
+        {
+          "title": "Agricultural Initiatives: Oil Palm Policy, Equipment, and Local Food Sourcing",
+          "plain_summary": "The government is rolling out major agricultural interventions including a multi-year oil palm development policy with a $500 million finance window, the distribution of agricultural machinery through Farmer Service Centres, and a directive forcing schools to buy local food supplies.",
+          "why_it_matters": "These programs directly support local food producers, poultry farmers, and smallholders by guaranteeing a ready market in schools and providing crucial machinery and patient financing. This reduces food imports, keeps money in the local economy, and creates hundreds of thousands of jobs along the agricultural value chain.",
+          "who_is_affected": [
+            "farmers",
+            "smallholder farmers",
+            "poultry producers",
+            "students"
+          ],
+          "key_changes": [
+            "Establishment of a Dedicated US$500 million Oil Palm Development Finance Window",
+            "Providing agriculture machinery for 50 agriculture districts with over 4,000 different machinery",
+            "Directing all schools, from basic to secondary, to purchase rice, maize, chicken and eggs produced in Ghana only"
+          ],
+          "effective_date": "2026-2032",
+          "source_references": [
+            {
+              "pages": "136-140",
+              "section": "SECTION 6: FISCAL POLICY MEASURES, STRUCTURAL REFORMS, AND KEY POLICY INITIATIVES"
+            }
+          ]
+        },
+        {
+          "title": "The Big Push Infrastructure Programme and Road Projects",
+          "plain_summary": "The government is deploying massive investments into physical infrastructure, specifically highlighting the addition of the Accra-Kumasi Expressway and the Adawso-Ekye Amanfrom Bridge, alongside a World Bank-funded program to build 1,000 kilometers of agricultural enclave roads.",
+          "why_it_matters": "For everyday travelers and farmers, these road networks drastically cut down travel time, reduce transport costs, and make it easier to get crops from farms to markets without heavy post-harvest losses. It stimulates local economies and creates tens of thousands of direct and indirect construction jobs.",
+          "who_is_affected": [
+            "farmers",
+            "transport operators",
+            "travelers",
+            "local contractors"
+          ],
+          "key_changes": [
+            "Adding the Accra-Kumasi Expressway and the Ekye Amanfrom-Adawso Bridge to the Big Push Infrastructure Programme",
+            "Implementing a three-year programme to construct 1,000 kilometers of agricultural enclave roads"
+          ],
+          "effective_date": "2026-2027",
+          "source_references": [
+            {
+              "pages": "140-142",
+              "section": "SECTION 6: FISCAL POLICY MEASURES, STRUCTURAL REFORMS, AND KEY POLICY INITIATIVES"
+            }
+          ]
+        },
+        {
+          "title": "Education Reforms: Ending Double-Track and Enhancing Basic Education",
+          "plain_summary": "The government is launching the Ghana Secondary Learning Improvement Programme (GSLIP) to entirely eliminate the double-track system in secondary schools, alongside wide-scale infrastructure and textbook provisions for basic education.",
+          "why_it_matters": "Parents and students benefit directly from the end of the crowded double-track school calendar, allowing children to attend school full-time in safe, modern environments. Improved basic school infrastructure and free textbooks ease financial burdens on families and elevate the overall quality of education.",
+          "who_is_affected": [
+            "students",
+            "teachers",
+            "parents"
+          ],
+          "key_changes": [
+            "Rolling out the Ghana Secondary Learning Improvement Programme (GSLIP) to end the double-track system",
+            "Constructing 200 new Junior High Schools, 200 primary schools, 200 kindergartens, 400 teachers' bungalows, and 400 places of convenience",
+            "Providing free comprehensive curricula-based textbooks for learners"
+          ],
+          "effective_date": "2026-2027",
+          "source_references": [
+            {
+              "pages": "147-148",
+              "section": "SECTION 6: FISCAL POLICY MEASURES, STRUCTURAL REFORMS, AND KEY POLICY INITIATIVES"
+            }
+          ]
+        },
+        {
+          "title": "Health Sector Initiatives and MahamaCares",
+          "plain_summary": "The government is expanding healthcare infrastructure by building and completing regional and district hospitals, while leveraging the newly created Ghana Medical Trust Fund (MahamaCares) to finance treatments for non-communicable diseases.",
+          "why_it_matters": "For ordinary citizens, especially those suffering from chronic illnesses like cancer, diabetes, and kidney diseases, the MahamaCares fund removes the agonizing choice between paying for life-saving medical care and maintaining their livelihoods. Expanding hospitals also brings healthcare closer to underserved regions.",
+          "who_is_affected": [
+            "patients",
+            "chronic illness sufferers",
+            "families dealing with non-communicable diseases"
+          ],
+          "key_changes": [
+            "Commencing construction of six new regional hospitals for newly created regions and two district hospitals at Bole and Shama",
+            "Completing ten abandoned Agenda 111 hospital projects",
+            "MahamaCares to introduce a comprehensive non-communicable disease (NCD) financing policy"
+          ],
+          "effective_date": "2026",
+          "source_references": [
+            {
+              "pages": "149-150",
+              "section": "SECTION 6: FISCAL POLICY MEASURES, STRUCTURAL REFORMS, AND KEY POLICY INITIATIVES"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "RESOURCE ALLOCATIONS",
+      "heading": "SECTION 7: RESOURCE ALLOCATIONS",
+      "pages": "157-161",
+      "startPage": 157,
+      "endPage": 161,
+      "topics": [
+        {
+          "title": "Agriculture, Food Security, and Agro-Processing Allocations",
+          "plain_summary": "The government is investing heavily in agriculture to improve food security, lower food inflation, and support farmers through specific funding programs, infrastructure, and loans.",
+          "why_it_matters": "These agricultural investments help local farmers protect their harvests from going to waste, improve access to markets via better roads, and lower food prices for everyday families.",
+          "who_is_affected": [
+            "Farmers",
+            "Traders",
+            "Agro-processors"
+          ],
+          "key_changes": [
+            "We are providing GH¢245 million in 2026 to the Ministry of Food and Agriculture.",
+            "we are establishing a dedicated GH¢6.9 billion Oil Palm finance window to support the implementation of the National Policy on Integrated Oil Palm Development (2026–2032).",
+            "we have allocated GH¢828 million for the construction of 1,000km of agriculture enclave roads.",
+            "We have allocated GH¢690 million to commence the operationalization of the Farmer Service Centers.",
+            "We have allocated GH¢200 million to the Ghana Buffer Stock Company to purchase the glut in food produce and reduce the losses to our farmers.",
+            "We have allocated GH¢100 million for aquaculture development."
+          ],
+          "effective_date": "2026",
+          "source_references": [
+            {
+              "pages": "157",
+              "section": "SECTION 7: RESOURCE ALLOCATIONS"
+            }
+          ]
+        },
+        {
+          "title": "Energy and Infrastructure Funding",
+          "plain_summary": "Significant funds are allocated to improve electricity access, settle energy sector debts, and build major roads and bridges to open up the country.",
+          "why_it_matters": "Reliable power and better roads make travel easier, cut transportation costs, reduce vehicle wear and tear, and keep businesses running without constant interruptions.",
+          "who_is_affected": [
+            "Workers",
+            "Drivers",
+            "Traders",
+            "Rural communities"
+          ],
+          "key_changes": [
+            "We have allocated GH¢2.0 billion for Phase I of the Rural Electricity Acceleration and Urban Intensification Initiative in 2026.",
+            "We have also allocated an amount GH¢15.2 billion for energy sector shortfall payments.",
+            "We have allocated an amount of GH¢4.8 billion to pay legacy IPP debt in 2026.",
+            "we have allocated an amount of GH¢4.3 billion to the Ministry of Road and Highways for road construction.",
+            "we have allocated GH¢3.0 billion to the Ghana Road Maintenance Trust Fund to construct 10km each in 166 constituencies in 2026",
+            "we are allocating GH¢30.0 billion in 2026 for the Big Push Infrastructure Programme for strategic roads and bridges."
+          ],
+          "effective_date": "2026",
+          "source_references": [
+            {
+              "pages": "157-158",
+              "section": "SECTION 7: RESOURCE ALLOCATIONS"
+            }
+          ]
+        },
+        {
+          "title": "Education Sector Support and School Programs",
+          "plain_summary": "The government is funding free secondary education, infrastructure repairs, learning materials, school feeding, and various allowances to support students and teachers.",
+          "why_it_matters": "Families will save money on school fees, registration costs, and supplies, while children benefit from better classrooms, free meals, and essential learning materials.",
+          "who_is_affected": [
+            "Students",
+            "Teachers",
+            "Parents",
+            "Persons with Disabilities"
+          ],
+          "key_changes": [
+            "we have allocated an amount of GH¢33.3 billion to the Ministry of Education for its programmes and activities in 2026.",
+            "an amount of GH¢9.9 billion has been allocated for the Ghana Education Trust Fund (GETFund).",
+            "we have provisioned an amount of GH¢4.2 billion for implementation of the Free Secondary Education in 2026.",
+            "we have allocated an amount of GH¢1.1 billion under the Ghana Secondary Learning Improvement Programme (GSLIP) in 2026.",
+            "The “No-Fee-Stress” policy will continue and we have allocated GH¢537 million in 2026.",
+            "We have allocated GH¢25 million for Free Tertiary Education for Persons with Disabilities.",
+            "We have allocated GH¢1.98 billion for the School Feeding Programme.",
+            "We have allocated GH¢292 million for free sanitary pads for girls.",
+            "We have also allocated GH¢207 million for Teacher Trainee Allowances.",
+            "Additionally, we have allocated GH¢169 million for BECE registration."
+          ],
+          "effective_date": "2026",
+          "source_references": [
+            {
+              "pages": "158-159",
+              "section": "SECTION 7: RESOURCE ALLOCATIONS"
+            }
+          ]
+        },
+        {
+          "title": "Healthcare and Social Protection Programs",
+          "plain_summary": "Funding is directed toward health insurance claims, chronic disease care, hospital construction, nursing allowances, and poverty reduction programs like LEAP.",
+          "why_it_matters": "Ordinary people gain better access to affordable healthcare, medications, financial assistance for chronic conditions, and direct social support for low-income households.",
+          "who_is_affected": [
+            "Patients",
+            "Nurses",
+            "Vulnerable citizens",
+            "Persons with chronic illnesses"
+          ],
+          "key_changes": [
+            "we have programmed an amount of GH¢9.0 billion in 2026 for NHIS claims, essential medicines, vaccines, bridging support and Free Primary Healthcare.",
+            "We have also allocated an amount of GH¢2.3 billion for the Ghana Medical Care Trust (MahamaCares)",
+            "GH¢474 million for Nursing Trainee Allowances to shore up frontline capacity.",
+            "We have also allocated GH¢600 million to construct three new regional hospitals.",
+            "We have allocated GH¢1.1 billion to the LEAP programme to protect the vulnerable."
+          ],
+          "effective_date": "2026",
+          "source_references": [
+            {
+              "pages": "159",
+              "section": "SECTION 7: RESOURCE ALLOCATIONS"
+            }
+          ]
+        },
+        {
+          "title": "Local Governance, Youth, Women, and Enterprise Support",
+          "plain_summary": "Financial support is provided for women-owned small businesses, youth apprenticeships, digital skills, local government assemblies, and assembly members.",
+          "why_it_matters": "Entrepreneurs and young job seekers get access to cheap loans, business training, and digital skills programs that help them start or expand their enterprises.",
+          "who_is_affected": [
+            "Women entrepreneurs",
+            "Youth",
+            "Assembly members",
+            "Small business owners"
+          ],
+          "key_changes": [
+            "we are providing another GH¢401 million to the Women’s Development Bank.",
+            "we are allocating GH¢170 million for the National Apprenticeship Programme.",
+            "we are providing GH¢100 million for the National Coders Programme and GH¢160 million for ‘Adwumawura’ enterprise support.",
+            "We have also provisioned GH¢100 million for monthly allowances to Assembly Members",
+            "we are allocating GH¢8.9 billion to the District Assemblies Common Fund"
+          ],
+          "effective_date": "2026",
+          "source_references": [
+            {
+              "pages": "159-160",
+              "section": "SECTION 7: RESOURCE ALLOCATIONS"
+            }
+          ]
+        },
+        {
+          "title": "Environment, Culture, Fisheries, and Housing Allocations",
+          "plain_summary": "Funds are allocated to combat illegal mining, support the film and creative arts industries, build fishing markets, provide housing, and support sports.",
+          "why_it_matters": "Fishermen receive equipment and markets, displaced families get housing support, and creative professionals get seed money to grow their industries.",
+          "who_is_affected": [
+            "Fishermen",
+            "Artists and filmmakers",
+            "Dam spillage victims",
+            "Local communities"
+          ],
+          "key_changes": [
+            "An amount of GH¢150 million has been allocated to the National Anti-Illegal Mining Operations Secretariat (NAIMOS)",
+            "Government has allocated an amount of GH¢20 million to the Film Fund as seed money",
+            "Government has also allocated an amount of GH¢20 million to the Creative Arts Fund",
+            "An amount of GH¢100 million has been allocated for the construction of fishing markets.",
+            "An amount of GH¢50 million has been allocated for the purchase of fishing nets and outboard motors.",
+            "Government has allocated GH¢500 million for District Housing including resettlement of Akosombo Dam spillage victims.",
+            "An amount of GH¢150 million has been allocated for the Black Stars to participate in the World Cup."
+          ],
+          "effective_date": "2026",
+          "source_references": [
+            {
+              "pages": "160-161",
+              "section": "SECTION 7: RESOURCE ALLOCATIONS"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "CONCLUSION",
+      "heading": "SECTION 8: CONCLUSION",
+      "pages": "162-164",
+      "startPage": 162,
+      "endPage": 164,
+      "topics": [
+        {
+          "title": "Economic Recovery and Budget Conclusion for 2026",
+          "plain_summary": "The government reported major economic improvements after taking office in January 2025, noting that inflation dropped to single digits, the Cedi appreciated against the US dollar, and public debt decreased. Programs like the 24-Hour Economy, the Big Push infrastructure project, and expanded social protections are moving forward to support growth and jobs.",
+          "why_it_matters": "Ordinary citizens and businesses face a more stable economic environment with single-digit inflation and a stronger Cedi, which helps lower the cost of living and import expenses. Expanded social programs and new job creation initiatives aim to ease everyday hardships and create long-term opportunities for families and workers across the country.",
+          "who_is_affected": [
+            "students",
+            "traders",
+            "farmers",
+            "workers",
+            "pensioners",
+            "entrepreneurs",
+            "households"
+          ],
+          "key_changes": [
+            "GDP growth rose from 5.3 percent in 2024 to 6.3 percent in the first half of 2025.",
+            "Inflation dropped sharply from 23.8 percent at the end of December 2024 to single digits, 8 percent, by October 2025.",
+            "Ghana’s total public debt declined sharply from GH¢726.7 billion (61.8% of GDP) in December 2024 to GH¢630.2 billion (45.0% of GDP) by October 2025."
+          ],
+          "effective_date": "2026",
+          "source_references": [
+            {
+              "pages": "162-164",
+              "section": "SECTION 8: CONCLUSION"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Appendices",
+      "heading": "Appendices",
+      "pages": "165-304",
+      "startPage": 165,
+      "endPage": 304,
+      "topics": [
+        {
+          "title": "Detailed tables and appendices",
+          "plain_summary": "The rest of the document is statistical tables and annexes that back up figures used earlier. They do not usually introduce new policy on their own.",
+          "why_it_matters": "Use these pages if you need the exact numbers behind a claim in an earlier section.",
+          "source_references": [
+            {
+              "pages": "165-304",
+              "section": "Appendices"
             }
           ]
         }

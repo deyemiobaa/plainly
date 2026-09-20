@@ -6,7 +6,8 @@ A lean hackathon MVP that turns hosted policy PDFs into a chapter-by-chapter pub
 
 - Serves real documents from `public/bills/`
 - Lists those files on `/process` and summarizes on demand
-- Splits a PDF into chapters, asks Gemini 3.8 Flash per chapter, and stores JSON
+- Splits a PDF into chapters, asks Gemini 3.5 Flash-Lite (priority) per chapter, and stores JSON
+- If Gemini is busy, retries then falls back to OpenAI `gpt-4o-mini` or Groq `llama-3.3-70b-versatile`
 - Lets anyone open `/` and the bill page to read the saved digest (no live LLM on visit)
 
 ## Run it
@@ -14,7 +15,7 @@ A lean hackathon MVP that turns hosted policy PDFs into a chapter-by-chapter pub
 ```bash
 npm install
 cp .env.example .env.local
-# Paste a Gemini API key from https://aistudio.google.com/apikey
+# Paste GEMINI_API_KEY (and optionally OPENAI_API_KEY or GROQ_API_KEY)
 npm run dev
 ```
 
