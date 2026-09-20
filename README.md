@@ -25,7 +25,7 @@ npm run dev
 
 ## Swap or add a document
 
-1. Drop a `.pdf`, `.md`, or `.txt` file into `public/bills/`
+1. Drop a `.pdf` file into `public/bills/`
 2. Optionally add title/date/teaser in `data/bills.ts`
 3. Run **Summarize** on `/process`
 

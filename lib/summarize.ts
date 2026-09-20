@@ -80,7 +80,7 @@ Rules:
 - Split the section into distinct topics the public can scan. A long chapter may yield several topics. A speechy chapter may yield one, or none.
 - plain_summary should proioritize touching on the impact of the section. what is changing, who is affected, and why it matters.
 - Prefer concrete money, taxes, programmes, dates, and obligations..
-- who_is_affected should be ordinary groups (students, traders, farmers, workers, patients), not ministries unless that is the point.
+- who_is_affected should be groups (students, traders, farmers, workers, patients, etc), not ministries unless that is the point. Keep the casing and taxonomy consistent, for example "small businesses" and "small and micro businesses" can be regarded as "small businesses". use the most common or relevant terms. stick to title case.
 - when writing why_it_matters, focus on the impact on the average person or group of people. This section should strictly contain NOT more than 200 words.
 - key_changes should be be a direct quote from the section. Do not make up or invent changes. Rather paraphrase the change in words let the affected persons or group understand the change.
 - source_references.pages must be page numbers from the "--- Page N ---" markers in the text, like "120-124" or "157".

@@ -1,4 +1,7 @@
-import type { Bill, DocumentDigest, Topic } from "@/lib/types";
+"use client";
+
+import { useMemo, useState } from "react";
+import type { Bill, DigestSection, DocumentDigest, Topic } from "@/lib/types";
 
 function firstPage(pages?: string) {
   if (!pages) {
@@ -118,6 +121,32 @@ function TopicCard({
   );
 }
 
+function affectedGroups(sections: DigestSection[]) {
+  const seen = new Map<string, string>();
+
+  for (const section of sections) {
+    for (const topic of section.topics) {
+      for (const group of topic.who_is_affected ?? []) {
+        const key = group.trim().toLowerCase();
+        if (key && !seen.has(key)) {
+          seen.set(key, group.trim());
+        }
+      }
+    }
+  }
+
+  return [...seen.values()].sort((a, b) =>
+    a.localeCompare(b, undefined, { sensitivity: "base" }),
+  );
+}
+
+function mentionsGroup(topic: Topic, group: string) {
+  const needle = group.toLowerCase();
+  return (topic.who_is_affected ?? []).some(
+    (item) => item.trim().toLowerCase() === needle,
+  );
+}
+
 export function DigestView({
   bill,
   digest,
@@ -125,7 +154,28 @@ export function DigestView({
   bill: Bill;
   digest: DocumentDigest;
 }) {
-  const sectionsWithTopics = digest.sections.filter(
+  const [selectedGroup, setSelectedGroup] = useState<string | null>(null);
+  const groups = useMemo(
+    () => affectedGroups(digest.sections),
+    [digest.sections],
+  );
+
+  const visibleSections = useMemo(() => {
+    if (!selectedGroup) {
+      return digest.sections;
+    }
+
+    return digest.sections
+      .map((section) => ({
+        ...section,
+        topics: section.topics.filter((topic) =>
+          mentionsGroup(topic, selectedGroup),
+        ),
+      }))
+      .filter((section) => section.topics.length > 0);
+  }, [digest.sections, selectedGroup]);
+
+  const sectionsWithTopics = visibleSections.filter(
     (section) => section.topics.length > 0,
   );
 
@@ -154,7 +204,7 @@ export function DigestView({
           Follow along by chapter
         </h2>
         <ol className="mt-4 flex flex-col gap-2">
-          {digest.sections.map((section) => (
+          {visibleSections.map((section) => (
             <li key={section.heading}>
               <a
                 href={`#${sectionId(section.heading)}`}
@@ -168,25 +218,72 @@ export function DigestView({
         </ol>
       </nav>
 
-      {sectionsWithTopics.map((section) => (
-        <section
-          key={section.heading}
-          id={sectionId(section.heading)}
-          className="scroll-mt-8"
-        >
-          <h2 className="font-serif text-2xl text-(--ink)">{section.heading}</h2>
-          <p className="mt-1 text-sm text-(--muted)">Pages {section.pages}</p>
-          <div className="mt-5 flex flex-col gap-4">
-            {section.topics.map((topic) => (
-              <TopicCard
-                key={`${section.heading}-${topic.title}`}
-                topic={topic}
-                file={bill.file}
-              />
-            ))}
+      {groups.length > 0 ? (
+        <section aria-label="Who is affected">
+          <div className="flex flex-wrap items-baseline justify-between gap-3">
+            <h2 className="text-sm font-medium tracking-wide text-(--muted) uppercase">
+              Who is affected
+            </h2>
+            <button
+              type="button"
+              onClick={() => setSelectedGroup(null)}
+              disabled={!selectedGroup}
+              className="text-sm text-(--accent) underline-offset-4 hover:underline disabled:text-(--muted) disabled:no-underline"
+            >
+              Clear filter
+            </button>
+          </div>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {groups.map((group) => {
+              const selected = selectedGroup?.toLowerCase() === group.toLowerCase();
+
+              return (
+                <button
+                  key={group.toLowerCase()}
+                  type="button"
+                  aria-pressed={selected}
+                  onClick={() =>
+                    setSelectedGroup(selected ? null : group)
+                  }
+                  className={
+                    selected
+                      ? "rounded-full bg-[#dfece4] px-2.5 py-0.5 text-xs text-[#21543c]"
+                      : "rounded-full border border-(--rule) bg-(--paper) px-2.5 py-0.5 text-xs text-(--muted) hover:border-(--accent) hover:text-(--ink)"
+                  }
+                >
+                  {group}
+                </button>
+              );
+            })}
           </div>
         </section>
-      ))}
+      ) : null}
+
+      {sectionsWithTopics.length === 0 ? (
+        <p className="text-sm text-(--muted)">
+          No chapters mention this group.
+        </p>
+      ) : (
+        sectionsWithTopics.map((section) => (
+          <section
+            key={section.heading}
+            id={sectionId(section.heading)}
+            className="scroll-mt-8"
+          >
+            <h2 className="font-serif text-2xl text-(--ink)">{section.heading}</h2>
+            <p className="mt-1 text-sm text-(--muted)">Pages {section.pages}</p>
+            <div className="mt-5 flex flex-col gap-4">
+              {section.topics.map((topic) => (
+                <TopicCard
+                  key={`${section.heading}-${topic.title}`}
+                  topic={topic}
+                  file={bill.file}
+                />
+              ))}
+            </div>
+          </section>
+        ))
+      )}
     </div>
   );
 }

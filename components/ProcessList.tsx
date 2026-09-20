@@ -207,7 +207,7 @@ export function ProcessList({ documents }: { documents: Bill[] }) {
                       type="button"
                       onClick={() => summarize(doc.slug, true)}
                       disabled={pendingSlug !== null}
-                      className="text-sm text-(--muted) underline-offset-4 hover:text-(--ink) hover:underline disabled:opacity-60"
+                      className="rounded-full bg-(--accent) px-5 py-2.5 text-sm font-medium text-(--paper) transition-colors hover:bg-(--accent-hover) disabled:cursor-wait disabled:opacity-60"
                     >
                       Start over
                     </button>
