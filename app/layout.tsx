@@ -46,12 +46,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               >
                 Home
               </Link>
-              <Link
+              {/* <Link
                 href="/process"
                 className="text-(--muted) hover:text-(--ink)"
               >
                 Process
-              </Link>
+              </Link> */}
             </nav>
           </div>
         </header>
