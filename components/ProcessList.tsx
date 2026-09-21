@@ -1,47 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import type { Bill } from "@/lib/types";
-
-type LogLine = {
-  type: "info" | "retry" | "error" | "complete";
-  message: string;
-  ts: string;
-};
-
-function formatTime(iso: string) {
-  const date = new Date(iso);
-  if (Number.isNaN(date.getTime())) {
-    return "--:--:--";
-  }
-
-  return date.toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-    hour12: false,
-  });
-}
-
-function lineClass(type: LogLine["type"]) {
-  if (type === "error") {
-    return "text-[#f4c4b0]";
-  }
-
-  if (type === "retry") {
-    return "text-[#f4ead2]";
-  }
-
-  if (type === "complete") {
-    return "text-[#b7d0c2]";
-  }
-
-  return "text-[#dfece4]";
-}
+import { useState } from "react";
+import { ProcessLogPanel } from "@/components/ProcessLog";
+import type { Bill, ProcessLogEvent } from "@/lib/types";
 
 async function readSse(
   response: Response,
-  onEvent: (event: LogLine) => void,
+  onEvent: (event: ProcessLogEvent) => void,
 ) {
   if (!response.body) {
     throw new Error("The server did not stream any progress.");
@@ -71,7 +36,7 @@ async function readSse(
         continue;
       }
 
-      const event = JSON.parse(dataLine.slice(6)) as LogLine;
+      const event = JSON.parse(dataLine.slice(6)) as ProcessLogEvent;
       onEvent(event);
       if (event.type === "error") {
         sawError = event.message;
@@ -84,25 +49,51 @@ async function readSse(
   }
 }
 
+function StoredProcessLog({
+  logs,
+  processedAt,
+}: {
+  logs: ProcessLogEvent[];
+  processedAt?: string;
+}) {
+  const when = processedAt?.match(/^(\d{4}-\d{2}-\d{2})T(\d{2}:\d{2})/)
+    ? `${processedAt.slice(0, 10)} ${processedAt.slice(11, 16)} UTC`
+    : null;
+
+  return (
+    <details className="group rounded-xl border border-(--rule)">
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 text-sm text-(--muted) marker:hidden [&::-webkit-details-marker]:hidden">
+        <span>
+          <span className="font-medium text-(--ink)">Last processing log</span>
+          <span>
+            {" "}
+            · {logs.length === 1 ? "1 line" : `${logs.length} lines`}
+            {when ? ` · ${when}` : ""}
+          </span>
+        </span>
+        <span className="shrink-0 text-(--accent) group-open:hidden">
+          Show
+        </span>
+        <span className="hidden shrink-0 text-(--accent) group-open:inline">
+          Hide
+        </span>
+      </summary>
+      <div className="px-3 pb-3">
+        <ProcessLogPanel logs={logs} />
+      </div>
+    </details>
+  );
+}
+
 export function ProcessList({ documents }: { documents: Bill[] }) {
   const [items, setItems] = useState(documents);
   const [pendingSlug, setPendingSlug] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [logsBySlug, setLogsBySlug] = useState<Record<string, LogLine[]>>({});
-  const logRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const [logsBySlug, setLogsBySlug] = useState<Record<string, ProcessLogEvent[]>>(
+    {},
+  );
 
-  useEffect(() => {
-    if (!pendingSlug) {
-      return;
-    }
-
-    const node = logRefs.current[pendingSlug];
-    if (node) {
-      node.scrollTop = node.scrollHeight;
-    }
-  }, [logsBySlug, pendingSlug]);
-
-  function appendLog(slug: string, event: LogLine) {
+  function appendLog(slug: string, event: ProcessLogEvent) {
     setLogsBySlug((current) => ({
       ...current,
       [slug]: [...(current[slug] ?? []), event],
@@ -171,7 +162,8 @@ export function ProcessList({ documents }: { documents: Bill[] }) {
 
       <ul className="flex flex-col gap-4">
         {items.map((doc) => {
-          const logs = logsBySlug[doc.slug] ?? [];
+          const liveLogs = logsBySlug[doc.slug] ?? [];
+          const storedLogs = doc.processLog ?? [];
           const isPending = pendingSlug === doc.slug;
 
           return (
@@ -215,26 +207,13 @@ export function ProcessList({ documents }: { documents: Bill[] }) {
                 </div>
               </div>
 
-              {logs.length > 0 ? (
-                <div
-                  ref={(node) => {
-                    logRefs.current[doc.slug] = node;
-                  }}
-                  className="max-h-56 overflow-auto rounded-xl bg-[#1c241d] p-3 font-mono text-xs leading-5"
-                >
-                  {logs.map((line, index) => (
-                    <p
-                      key={`${line.ts}-${index}`}
-                      className={lineClass(line.type)}
-                    >
-                      <span className="text-[#8a938c]">
-                        {formatTime(line.ts)}
-                      </span>
-                      {"  "}
-                      {line.message}
-                    </p>
-                  ))}
-                </div>
+              {isPending || liveLogs.length > 0 ? (
+                <ProcessLogPanel logs={liveLogs} autoScroll showCursor={isPending} />
+              ) : storedLogs.length > 0 ? (
+                <StoredProcessLog
+                  logs={storedLogs}
+                  processedAt={doc.processedAt}
+                />
               ) : null}
             </li>
           );

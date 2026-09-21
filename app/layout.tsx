@@ -20,8 +20,8 @@ const sourceSerif = Source_Serif_4({
 
 export const metadata: Metadata = {
   title: {
-    default: "Policy Explainer",
-    template: "%s · Policy Explainer",
+    default: "Plainly",
+    template: "%s · Plainly",
   },
   description:
     "Plain-language summaries of bills, broken down by how they affect different people.",
@@ -37,7 +37,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <header className="border-b border-(--rule)">
           <div className="mx-auto flex w-full max-w-5xl items-center justify-between gap-4 px-5 py-4 sm:px-8">
             <Link href="/" className="font-serif text-lg text-(--ink)">
-              Policy Explainer
+              Plainly
             </Link>
             <nav className="flex items-center gap-4 text-sm">
               <Link

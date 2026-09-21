@@ -1,4 +1,4 @@
-# Policy Explainer
+# Plainly
 
 A lean hackathon MVP that turns hosted policy PDFs into a chapter-by-chapter public digest.
 

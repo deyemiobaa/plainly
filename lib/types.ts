@@ -23,6 +23,12 @@ export type DigestSection = {
   topics: Topic[];
 };
 
+export type ProcessLogEvent = {
+  type: "info" | "retry" | "error" | "complete";
+  message: string;
+  ts: string;
+};
+
 export type DocumentDigest = {
   document: {
     slug: string;
@@ -31,6 +37,7 @@ export type DocumentDigest = {
     processed_at: string;
     model: string;
   };
+  process_log?: ProcessLogEvent[];
   sections: DigestSection[];
 };
 
@@ -44,4 +51,5 @@ export type Bill = {
   hasDigest: boolean;
   processedAt?: string;
   topicCount?: number;
+  processLog?: ProcessLogEvent[];
 };

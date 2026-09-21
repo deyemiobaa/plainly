@@ -8,18 +8,19 @@ import {
 } from "@/lib/documents";
 import { extractDocumentPages } from "@/lib/extract";
 import { detectSections, type DetectedSection } from "@/lib/sections";
-import type { DigestSection, DocumentDigest, Topic } from "@/lib/types";
+import type {
+  DigestSection,
+  DocumentDigest,
+  ProcessLogEvent,
+  Topic,
+} from "@/lib/types";
+
+export type { ProcessLogEvent } from "@/lib/types";
 
 const GEMINI_MODEL = "gemini-3.5-flash-lite";
 const OPENAI_MODEL = "gpt-4o-mini";
 const GROQ_MODEL = "llama-3.3-70b-versatile";
 const RETRY_DELAYS_MS = [5_000, 15_000, 45_000];
-
-export type ProcessLogEvent = {
-  type: "info" | "retry" | "error" | "complete";
-  message: string;
-  ts: string;
-};
 
 export class MissingApiKeyError extends Error {
   constructor() {
@@ -433,8 +434,11 @@ export async function processDocument({
   fresh?: boolean;
   onLog?: (event: ProcessLogEvent) => void;
 }): Promise<DocumentDigest> {
+  const processLog: ProcessLogEvent[] = [];
   const log: LogFn = (event) => {
-    onLog?.({ ...event, ts: new Date().toISOString() });
+    const full: ProcessLogEvent = { ...event, ts: new Date().toISOString() };
+    processLog.push(full);
+    onLog?.(full);
   };
 
   const bill = await getDocument(slug);
@@ -501,6 +505,7 @@ export async function processDocument({
       processed_at: new Date().toISOString(),
       model: GEMINI_MODEL,
     },
+    process_log: processLog,
     sections: digestSections,
   };
 

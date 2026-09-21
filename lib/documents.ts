@@ -70,6 +70,7 @@ export async function listDocuments(): Promise<Bill[]> {
         hasDigest: Boolean(digest),
         processedAt: digest?.document.processed_at,
         topicCount,
+        processLog: digest?.process_log,
       } satisfies Bill;
     }),
   );
